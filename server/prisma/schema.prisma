@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_DATABASE_URL")
+}
+
+model User {
+  id            Int                 @id @default(autoincrement())
+  email         String              @unique
+  name          String?
+  password      String
+  money         Int                 @default(0)
+  role          Role                @default(USER)
+  vip           Int                 @default(0)
+  status        Status              @default(ACTIVE)
+  hisBuyTool    HistoryBuyTool[]
+  hisChargeMomo HistoryChargeMomo[]
+  transactions  Transaction[]
+  logs          Log[]
+}
+
+model Tool {
+  id             Int              @id @default(autoincrement())
+  nameTool       String
+  priceMonth     Int
+  priceYear      Int
+  server         Int              @default(99)
+  version        String
+  infor          String
+  content        String
+  updateNote     String
+  image          String
+  video          String
+  sold           Int              @default(0)
+  click          Int              @default(0)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  historyBuyTool HistoryBuyTool[]
+  linkTool       LinkTool?
+}
+
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  oldMoney  Int
+  newMoney  Int
+  money     Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model HistoryChargeMomo {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  codeId      String   @unique
+  phoneNumber String
+  money       Int
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model HistoryBuyTool {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  toolId    Int
+  key       String   @default("xxx")
+  server    Int      @default(99)
+  type      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tool      Tool     @relation(fields: [toolId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model LinkTool {
+  id        Int      @id @default(autoincrement())
+  toolId    Int      @unique
+  link      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tool      Tool     @relation(fields: [toolId], references: [id])
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
