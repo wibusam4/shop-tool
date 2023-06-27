@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Input from "./Input";
+import Input from "../Input/Input";
 import { useState } from "react";
-import { AuthAction } from "@/src/actions/Auth.action";
+import { AuthService } from "@/src/services/Auth.service";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,7 +10,7 @@ const Register = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    await AuthAction.register({
+    await AuthService.register({
       name: data.name,
       email: data.email,
       password: data.password,
@@ -27,23 +27,15 @@ const Register = () => {
         <Input label="Tên người dùng" name="name" type="text" />
         <Input label="Email" name="email" type="text" />
         <Input label="Mật khẩu" name="password" type="password" />
-        <Input
-          label="Mật khẩu xác nhận"
-          name="passwordConfirm"
-          type="password"
-        />
+        <Input label="Mật khẩu xác nhận" name="passwordConfirm" type="password" />
         <label className="label">
           <a href="#" className="label-text-alt link link-hover">
             Quên mật khẩu?
           </a>
         </label>
         <div className="form-control mt-6">
-          <button
-            className={`btn btn-success ${isLoading ? "btn-disabled" : ""}`}
-          >
-            <span
-              className={`${isLoading ? "loading loading-spinner" : ""}`}
-            ></span>
+          <button className={`btn btn-success ${isLoading ? "btn-disabled" : ""}`}>
+            <span className={`${isLoading ? "loading loading-spinner" : ""}`}></span>
             {`${isLoading ? "" : "Đăng Kí"}`}
           </button>
         </div>

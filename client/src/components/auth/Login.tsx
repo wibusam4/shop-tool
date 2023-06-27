@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Input from "./Input";
+import Input from "../Input/Input";
 import { useState } from "react";
-import { AuthAction } from "@/src/actions/Auth.action";
+import { AuthService } from "@/src/services/Auth.service";
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,7 +10,7 @@ const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    await AuthAction.login({
+    await AuthService.login({
       email: data.email as string,
       password: data.password as string,
     });
@@ -31,12 +31,8 @@ const Login = () => {
           </a>
         </label>
         <div className="form-control mt-6">
-          <button
-            className={`btn btn-success ${isLoading ? "btn-disabled" : ""}`}
-          >
-            <span
-              className={`${isLoading ? "loading loading-spinner" : ""}`}
-            ></span>
+          <button className={`btn btn-success ${isLoading ? "btn-disabled" : ""}`}>
+            <span className={`${isLoading ? "loading loading-spinner" : ""}`}></span>
             {`${isLoading ? "" : "Đăng nhập"}`}
           </button>
         </div>

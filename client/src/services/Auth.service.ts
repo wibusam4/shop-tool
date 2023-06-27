@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { setCookie } from "cookies-next";
 import validate from "../libs/validate";
 
-export const AuthAction = {
+export const AuthService = {
   login: async (data: AuthForm) => {
     if (data.email === "" || !validate.email(data.email as string)) {
       toast.error("Vui lòng nhập tài khoản!");
@@ -60,11 +60,7 @@ export const AuthAction = {
   },
 
   changePass: async (values: any, token: string) => {
-    if (
-      !values.currentPassword ||
-      !values.newPassword ||
-      !values.confirmPassword
-    ) {
+    if (!values.currentPassword || !values.newPassword || !values.confirmPassword) {
       toast.error("Điền đủ thông tin!");
       return false;
     }

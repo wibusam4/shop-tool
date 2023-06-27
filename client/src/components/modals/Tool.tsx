@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../auth/Input";
+import Input from "../Input/Input";
 
 const ModalTool = () => {
   return (

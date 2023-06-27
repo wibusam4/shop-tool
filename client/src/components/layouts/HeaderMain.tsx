@@ -3,6 +3,7 @@ import { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
+import Image from "next/image";
 const HeaderMain = () => {
   const { user } = useContext(UserContext);
   return (
@@ -49,9 +50,11 @@ const HeaderMain = () => {
               </li>
             </ul>
           </div>
-          <Link href={'/'} className="font-title inline-flex text-lg md:text-2xl">
-            <span className="uppercase">TOOL</span>{" "}
-            <span className="lowercase text-[#1AD1A5]">wibu</span>
+          <Link
+            href={"/"}
+            className="font-title inline-flex text-lg md:text-2xl"
+          >
+            <img src="/logo.png" className="object-fill max-h-[40px]" alt="toolwibu.me" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -121,7 +124,10 @@ const HeaderMain = () => {
               </ul>
             </div>
           ) : (
-            <Link href={`/auth/login`} className="btn btn-error btn-sm md:btn-md text-xs md:text-sm">
+            <Link
+              href={`/auth/login`}
+              className="btn btn-error btn-sm md:btn-md text-xs md:text-sm"
+            >
               Đăng Nhập
             </Link>
           )}

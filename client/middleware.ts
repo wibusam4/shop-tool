@@ -1,10 +1,8 @@
-import { getCookie } from "cookies-next";
 import { NextRequest, NextResponse } from "next/server";
 
 function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
   const role = request.cookies.get("role");
-  console.log(token, role)
   if (request.nextUrl.pathname.startsWith("/auth") && token && role) {
     return NextResponse.redirect(new URL("/", request.url));
   }

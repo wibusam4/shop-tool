@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface MainProps {
   style?: string;
   label: string;
   type: string;
   name: string;
+  data?: string | number;
 }
-const Input: React.FC<MainProps> = ({ label, type, name, style }) => {
+const Input: React.FC<MainProps> = ({ label, type, name, style, data }) => {
+  const [value, setValue] = useState(data);
   return (
     <div className={`form-control ${style}`}>
       <label className="label font-semibold">
@@ -15,7 +17,9 @@ const Input: React.FC<MainProps> = ({ label, type, name, style }) => {
       <input
         type={type}
         name={name}
+        value={value}
         placeholder={label.toLowerCase()}
+        onChange={(event) => setValue(event.target.value)}
         className="input input-bordered"
       />
     </div>

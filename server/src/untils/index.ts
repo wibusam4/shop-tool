@@ -1,6 +1,6 @@
 import config from '~/config'
 import jwt from 'jsonwebtoken'
-import { User } from '@prisma/client'
+import { Tool, User } from '@prisma/client'
 import * as requestIp from 'request-ip'
 import { Response, Request } from 'express'
 
@@ -38,4 +38,19 @@ export const dataLog = (userId: number, content: string, req: Request) => {
 
 export const dataTransaction = (userId: number, oldMoney: number, newMoney: number, money: number, content: string) => {
   return { userId, oldMoney, newMoney, money, content }
+}
+
+export const dataTool = (tool: Tool) => {
+  return {
+    nameTool: tool.nameTool,
+    priceMonth: Number(tool.priceMonth),
+    priceYear: Number(tool.priceYear),
+    server: Number(tool.server),
+    version: tool.version,
+    infor: tool.infor,
+    content: tool.content,
+    updateNote: tool.updateNote,
+    image: tool.image,
+    video: tool.video
+  }
 }

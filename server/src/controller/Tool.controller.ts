@@ -1,7 +1,7 @@
 import { Tool } from '@prisma/client'
 import { Request, Response } from 'express'
 import prisma from '~/db'
-import { responseJson } from '~/untils/index'
+import { dataTool, responseJson } from '~/untils/index'
 
 const ToolController = {
   getById: async (req: Request, res: Response) => {
@@ -28,9 +28,10 @@ const ToolController = {
   addTool: async (req: Request, res: Response) => {
     try {
       const tool: Tool = req.body
-      const newTool = await prisma.tool.create({ data: { ...tool } })
+      const newTool = await prisma.tool.create({ data: dataTool(tool) })
       return responseJson(res, 200, true, newTool)
-    } catch {
+    } catch (error: any) {
+      console.log(error.message)
       return responseJson(res, 200, false, 'Điền đủ thông tin')
     }
   },
@@ -38,9 +39,10 @@ const ToolController = {
   editTool: async (req: Request, res: Response) => {
     try {
       const tool: Tool = req.body
-      const updateTool = await prisma.tool.update({ where: { id: tool.id }, data: { ...tool } })
+      const updateTool = await prisma.tool.update({ where: { id: Number(tool.id) }, data: dataTool(tool) })
       return responseJson(res, 200, true, updateTool)
-    } catch {
+    } catch (error: any) {
+      console.log(error.message)
       return responseJson(res, 200, false, 'Không tim thấy tool')
     }
   },

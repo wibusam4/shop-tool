@@ -17,5 +17,22 @@ export interface User {
 declare global {
   interface Window {
     modal_tool: HTMLDialogElement;
+    modal_video: HTMLDialogElement;
+  }
+
+  interface Tool {
+    id: number;
+    nameTool: string;
+    priceMonth: number;
+    priceYear: number;
+    server: number;
+    version: string;
+    click: number;
+    sold: number;
+    infor: string;
+    content: string;
+    updateNote: string;
+    image: string;
+    video: string;
   }
 }

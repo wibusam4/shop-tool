@@ -33,22 +33,22 @@ const menus: Menu[] = [
     name: "Dashboard",
   },
   {
-    path: "/admin/tools",
+    path: "/admin/tool",
     icon: <InboxArrowDownIcon className={iconClasses} />,
     name: "Danh Sách Tool",
   },
   {
-    path: "/admin/members",
+    path: "/admin/member",
     icon: <UsersIcon className={iconClasses} />,
     name: "Thành Viên",
   },
   {
-    path: "/admin/his-tools",
+    path: "/admin/his-tool",
     icon: <ShoppingBagIcon className={iconClasses} />,
     name: "Giao Dịch Tool",
   },
   {
-    path: "/admin/transactions",
+    path: "/admin/transaction",
     icon: <BoltIcon className={iconClasses} />,
     name: "Dòng Tiền",
   },

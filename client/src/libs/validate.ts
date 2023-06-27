@@ -6,11 +6,18 @@ const validate = {
   },
 
   string: (values: string, lenght: number, maxLenght: number) => {
-    const expression: RegExp = new RegExp(
-      `^[a-zA-Z0-9]{${lenght},${maxLenght}}$`
-    );
+    const expression: RegExp = new RegExp(`^[a-zA-Z0-9]{${lenght},${maxLenght}}$`);
     const result: boolean = expression.test(values);
     return result;
+  },
+
+  hasEmptyValues: (data: Record<string, unknown>) => {
+    for (let key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key) && data[key] === "") {
+        return true;
+      }
+    }
+    return false;
   },
 };
 

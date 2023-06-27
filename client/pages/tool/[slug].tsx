@@ -1,21 +1,28 @@
-import ToolAction from "@/src/actions/Tool.acction";
+import ToolService from "@/src/services/Tool.service";
 import LayoutMain from "@/src/components/layouts/LayoutMain";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import Video from "@/src/components/modals/Video";
+
 interface MainProps {
-  tool: any;
+  tool: Tool;
 }
 const ToolIem: React.FC<MainProps> = ({ tool }) => {
-  
+  const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
+  const [showModal, setShowModal] = useState(false);
+  const handelShowModal = () => {
+    console.log(showModal);
+    setShowModal(!showModal);
+  };
   return (
     <LayoutMain>
       <div className="bg-base-200 mx-auto rounded shadow-md w-[1024px]">
         <div className="h-full">
           <div className="tiltle p-4 md:p-10 h-full">
-            <h1 className="text-center text-2xl uppercase font-bold relative">
-              Thông tin tool
-            </h1>
+            <h1 className="text-center text-2xl uppercase font-bold relative">Thông tin tool</h1>
             <div className="w-36 h-1 bg-success m-auto"></div>
             {tool ? (
               <div className="card-item mt-4 max-w-[1280px]">
@@ -28,11 +35,9 @@ const ToolIem: React.FC<MainProps> = ({ tool }) => {
                     />
                   </div>
                   <div className="tool py-10 sm:py-0 px-0 sm:px-10 flex flex-col gap-y-2 font-semibold w-full">
-                    <h1 className="text-xl uppercase font-bold flex gap-x-3">
+                    <h1 className="text-xl uppercase font-bold flex flex-col sm:flex-row gap-x-3">
                       {tool.nameTool}{" "}
-                      <div className="badge badge-primary badge-xs mt-1 py-[6px]">
-                        verison: {tool.version}
-                      </div>
+                      <div className="badge badge-primary badge-xs mt-1 py-[6px]">verison: {tool.version}</div>
                     </h1>
                     <p>
                       Người bán: <span className="text-error">ADMIN</span>
@@ -58,26 +63,30 @@ const ToolIem: React.FC<MainProps> = ({ tool }) => {
                           </span>
                         </span>
                       </button>
-                      <button className="btn btn-info flex-col">
+                      <button
+                        onClick={() => {
+                          handelShowModal();
+                        }}
+                        className="btn btn-info flex-col"
+                      >
                         Xem Demo
                       </button>
+                      {showModal ? <Video handle={handelShowModal}></Video> : null}
                     </div>
                   </div>
                 </div>
                 <div className="content-tool mt-4">
                   <h1 className="font-bold text-lg">-Mô tả chi tiết tool:</h1>
-                  <div className="content">{tool.content}</div>
+                  <ReactQuill value={tool.content} readOnly={true} theme={"bubble"} />
                 </div>
                 <div className="content-tool mt-4">
                   <h1 className="font-bold text-lg">-Nhật kí cập nhật:</h1>
-                  <div className="content">{tool.updateNote}</div>
+                  <ReactQuill value={tool.updateNote} readOnly={true} theme={"bubble"} />
                 </div>
               </div>
             ) : (
               <div className="h-full flex justify-center items-center">
-                <h1 className="text-2xl mb-20 text-center">
-                  Không tìm thấy tool
-                </h1>
+                <h1 className="text-2xl mb-20 text-center">Không tìm thấy tool</h1>
               </div>
             )}
           </div>
@@ -104,7 +113,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
   const id = params.slug as string;
-  const tool = JSON.parse(JSON.stringify(await ToolAction.getToolById(id)));
+  const tool = JSON.parse(JSON.stringify(await ToolService.getToolById(id)));
   return {
     props: {
       tool,
