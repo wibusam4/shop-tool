@@ -5,18 +5,9 @@ export interface AuthForm {
   passwordConfirm?: string | FormDataEntryValue;
 }
 
-export interface User {
-  id: number;
-  email: string;
-  money: number;
-  name: string;
-  role: string;
-  vip: string;
-}
-
 declare global {
   interface Window {
-    modal_tool: HTMLDialogElement;
+    modal_buy_tool: HTMLDialogElement;
     modal_video: HTMLDialogElement;
   }
 
@@ -34,5 +25,15 @@ declare global {
     updateNote: string;
     image: string;
     video: string;
+  }
+
+  interface User {
+    id: number;
+    email: string;
+    money: number;
+    name: string;
+    role: string;
+    vip: string;
+    status: string;
   }
 }

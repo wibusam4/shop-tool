@@ -15,5 +15,27 @@ const UserService = {
       console.log(error);
     }
   },
+
+  getAllUser: async (token: string) => {
+    try {
+      const response = await axios(config("get", "/user/getall", token));
+      if (response.data.success) {
+        return response.data.message.users;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getById: async (token: string, id: string) => {
+    try {
+      const response = await axios(config("post", "/user/get", token, { id }));
+      if (response.data.success) {
+        return response.data.message.user;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 export default UserService;

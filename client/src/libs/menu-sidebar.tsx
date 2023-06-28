@@ -38,7 +38,7 @@ const menus: Menu[] = [
     name: "Danh Sách Tool",
   },
   {
-    path: "/admin/member",
+    path: "/admin/user",
     icon: <UsersIcon className={iconClasses} />,
     name: "Thành Viên",
   },

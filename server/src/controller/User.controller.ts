@@ -66,6 +66,20 @@ const UserController = {
     }
   },
 
+  getById: async (req: RequestHasLogin, res: Response) => {
+    try {
+      const id = req.body.id
+      const user = await prisma.user.findFirst({ where: { id: Number(id) } })
+
+      if (!user) return responseJson(res, 200, false, 'Không tìm thấy user')
+
+      responseJson(res, 200, true, { user })
+    } catch (error: any) {
+      console.log(error.message)
+      return responseJson(res, 200, false, 'Không tìm thấy user')
+    }
+  },
+
   getAll: async (req: Request, res: Response) => {
     try {
       const users = await prisma.user.findMany()

@@ -3,7 +3,6 @@ import { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
-import Image from "next/image";
 const HeaderMain = () => {
   const { user } = useContext(UserContext);
   return (
@@ -19,18 +18,10 @@ const HeaderMain = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li>
                 <a>Item 1</a>
               </li>
@@ -50,10 +41,7 @@ const HeaderMain = () => {
               </li>
             </ul>
           </div>
-          <Link
-            href={"/"}
-            className="font-title inline-flex text-lg md:text-2xl"
-          >
+          <Link href={"/"} className="font-title inline-flex text-lg md:text-2xl">
             <img src="/logo.png" className="object-fill max-h-[40px]" alt="toolwibu.me" />
           </Link>
         </div>
@@ -66,10 +54,7 @@ const HeaderMain = () => {
               <label tabIndex={0} className="">
                 Tool
               </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-              >
+              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
                   <Link href={"/tool/"}>Server TeaMobile</Link>
                 </li>
@@ -124,10 +109,7 @@ const HeaderMain = () => {
               </ul>
             </div>
           ) : (
-            <Link
-              href={`/auth/login`}
-              className="btn btn-error btn-sm md:btn-md text-xs md:text-sm"
-            >
+            <Link href={`/auth/login`} className="btn btn-error btn-sm md:btn-md text-xs md:text-sm">
               Đăng Nhập
             </Link>
           )}

@@ -3,9 +3,10 @@ import LayoutMain from "@/src/components/layouts/LayoutMain";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Video from "@/src/components/modals/Video";
+import BuyTool from "@/src/components/modals/BuyTool";
 
 interface MainProps {
   tool: Tool;
@@ -13,15 +14,19 @@ interface MainProps {
 const ToolIem: React.FC<MainProps> = ({ tool }) => {
   const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
   const [showModal, setShowModal] = useState(false);
+  const [type, setType] = useState(1);
+  const handleClick = (type: number) => {
+    setType(type);
+    window.modal_buy_tool.showModal();
+  };
   const handelShowModal = () => {
-    console.log(showModal);
     setShowModal(!showModal);
   };
   return (
     <LayoutMain>
-      <div className="bg-base-200 mx-auto rounded shadow-md w-[1024px]">
-        <div className="h-full">
-          <div className="tiltle p-4 md:p-10 h-full">
+      <div className="bg-base-200 mx-auto rounded shadow-md w-full">
+        <div className="w-full max-w-[1280px] m-auto">
+          <div className="tiltle p-4 md:p-10 max-w-[1024px] m-auto">
             <h1 className="text-center text-2xl uppercase font-bold relative">Thông tin tool</h1>
             <div className="w-36 h-1 bg-success m-auto"></div>
             {tool ? (
@@ -44,23 +49,20 @@ const ToolIem: React.FC<MainProps> = ({ tool }) => {
                     </p>
                     <p>Thông tin: {tool.infor}</p>
                     <p>Server: {tool.server}</p>
+                    <BuyTool tool={tool} type={type} />
                     <div className="flex flex-wrap gap-4">
-                      <button className="btn btn-success flex-col">
-                        Mua Tháng{" "}
+                      <button className="btn btn-success flex-col" onClick={() => handleClick(1)}>
+                        Mua Tháng
                         <span className="flex items-end">
-                          <span>{format.money(tool.priceMonth)}</span>
-                          <span>
-                            <StarIcon className="w-4 h-4" />
-                          </span>
+                          {format.money(tool.priceMonth)}
+                          <StarIcon className="w-4 h-4" />
                         </span>
                       </button>
-                      <button className="btn btn-warning flex-col">
-                        Mua Năm{" "}
+                      <button className="btn btn-warning flex-col" onClick={() => handleClick(2)}>
+                        Mua Năm
                         <span className="flex items-end">
-                          <span>{format.money(tool.priceYear)}</span>
-                          <span>
-                            <StarIcon className="w-4 h-4" />
-                          </span>
+                          {format.money(tool.priceYear)}
+                          <StarIcon className="w-4 h-4" />
                         </span>
                       </button>
                       <button
@@ -71,7 +73,7 @@ const ToolIem: React.FC<MainProps> = ({ tool }) => {
                       >
                         Xem Demo
                       </button>
-                      {showModal ? <Video handle={handelShowModal}></Video> : null}
+                      {showModal ? <Video handle={handelShowModal} tool={tool}></Video> : null}
                     </div>
                   </div>
                 </div>

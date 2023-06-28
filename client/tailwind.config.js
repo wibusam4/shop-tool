@@ -7,7 +7,17 @@ module.exports = {
     './src/**/*.{js,ts,tsx,jsx}',
   ],
   daisyui: {
-    themes: ["light"],
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          "primary": "blue",
+          "primary-focus": "mediumblue",
+          "error": "#FF0505",
+          "base-100": "white"
+        },
+      },
+    ],
   },
   plugins: [require("daisyui")],
 }
