@@ -13,13 +13,14 @@ interface MainProps {
 interface ChildProps {
   children: React.ReactNode;
   title: string;
+  color?: string;
 }
 
-const Table: React.FC<ChildProps> = ({ children, title }) => {
+const Table: React.FC<ChildProps> = ({ children, title, color }) => {
   return (
     <div className="flex">
       <p className="w-1/2">{title}</p>
-      <p className="w-1/2">{children}</p>
+      <p className={`w-1/2 ${color}`}>{children}</p>
     </div>
   );
 };
@@ -38,16 +39,20 @@ const BuyTool: React.FC<MainProps> = ({ tool, type }) => {
         <div className="p-4">
           <p className="text-base">Thông tin đơn hàng</p>
           <div className="divider mt-0 mb-0"></div>
-          <Table title="Tên tool: ">{tool.nameTool}</Table>
+          <Table color="text-primary" title="Tên tool: ">
+            {tool.nameTool}
+          </Table>
           <div className="divider mt-0 mb-0"></div>
-          <Table title="Giá: ">
+          <Table title="Giá: " color="text-error">
             <span className="flex gap-x-[2px]">
               {format.money(price)}
               <StarIcon className="w-5 h-5 text-warning" />
             </span>
           </Table>
           <div className="divider mt-0 mb-0"></div>
-          <Table title="Hạn sử dụng: ">{type == 1 ? "1 tháng" : "1 năm"}</Table>
+          <Table color="text-secondary" title="Hạn sử dụng: ">
+            {type == 1 ? "1 tháng" : "1 năm"}
+          </Table>
           <div className="divider mt-0 mb-0"></div>
           <Input label="Mã giảm giá" name="coupon" type="text" />
           <div className="divider mt-0 mb-0"></div>
@@ -68,10 +73,9 @@ const BuyTool: React.FC<MainProps> = ({ tool, type }) => {
           <div>
             <h2 className="text-error">Lưu ý:</h2>
             <ul className="list-disc list-inside text-primary">
-              <li className="text-error">Bạn sẽ không được hoàn tiền nếu tool không đúng như yêu cầu</li>
-              <li>Đảm bảo bạn đã đọc kĩ mô tả và chức năng tool</li>
-              <li>Đảm bảo bạn đã xem video demo</li>
-              <li>Đảm bảo bạn đã chọn đúng thời gian mua</li>
+              <li>Đọc kĩ mô tả và chức năng tool</li>
+              <li>Xem video demo</li>
+              <li>Chọn đúng thời gian mua</li>
             </ul>
           </div>
         </div>

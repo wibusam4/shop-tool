@@ -33,7 +33,7 @@ const Home: React.FC<MainProps> = ({ data }) => {
                               className="rounded"
                             />
                           </div>
-                          <div className="card-body items-center text-center">
+                          <div className="card-body items-center text-center px-6">
                             <h2 className="card-title">{tool.nameTool}</h2>
                             <p className="text-error font-semibold flex">
                               {format.money(tool.priceMonth)} <StarIcon className="w-5 h-5 text-warning" />/ 1 Tháng

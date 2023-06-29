@@ -19,6 +19,8 @@ const UserController = {
 
       if (!user) return responseJson(res, 200, false, 'Email không đúng hoặc chưa đăng kí')
 
+      if (user.status === 'INACTIVE') return responseJson(res, 200, false, 'Bạn bị khóa tài khoản')
+
       const match = await bcrypt.compare(password, user.password)
 
       if (!match) return responseJson(res, 200, false, 'Mật khẩu không chính xác')
@@ -90,6 +92,20 @@ const UserController = {
     }
   },
 
+  edit: async (req: RequestHasLogin, res: Response) => {
+    try {
+      const userId = req.id
+      const { role, status, vip, id } = req.body
+      if (!role || !status || !vip || !id) return responseJson(res, 200, false, 'Điền thiếu thông tin')
+      await prisma.user.update({ where: { id: Number(id) }, data: { role, status, vip: Number(vip) } })
+      await prisma.log.create({ data: dataLog(userId ?? 1, `Sửa thông tin userId: ${id}`, req) })
+      responseJson(res, 200, true, 'Sửa thành công')
+    } catch (error: any) {
+      console.log(error)
+      responseJson(res, 200, false, 'Xảy ra lỗi')
+    }
+  },
+
   changeMoney: async (req: Request, res: Response) => {
     try {
       const { userId, money } = req.body
@@ -109,7 +125,7 @@ const UserController = {
         }
       })
       await prisma.log.create({
-        data: dataLog(1, `Cộng tiền userId: ${user.id}`, req)
+        data: dataLog(1, `${Number(money) > 0 ? 'Cộng tiền' : 'Trừ tiền'} userId: ${user.id}`, req)
       })
       responseJson(res, 200, true, 'Cộng tiền thành công')
     } catch (error: any) {

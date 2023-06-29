@@ -11,6 +11,7 @@ UserRoute.get('/getall', login, admin, UserController.getAll)
 UserRoute.post('/changemoney', login, admin, UserController.changeMoney)
 UserRoute.post('/changepass', login, UserController.changePassword)
 UserRoute.post('/buytool', login, UserController.buyTool)
+UserRoute.put('/edit', login, admin, UserController.edit)
 UserRoute.delete('/delete', login, admin, UserController.delete)
 
 export default UserRoute

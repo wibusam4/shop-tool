@@ -53,6 +53,11 @@ const menus: Menu[] = [
     name: "Dòng Tiền",
   },
   {
+    path: "/admin/log",
+    icon: <TableCellsIcon className={iconClasses} />,
+    name: "Log",
+  },
+  {
     path: "",
     icon: <Cog6ToothIcon className={`${iconClasses} inline-block`} />,
     name: "Settings",

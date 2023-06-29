@@ -3,7 +3,11 @@ import { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
+import { useRouter } from "next/router";
+import { data } from "autoprefixer";
 const HeaderMain = () => {
+  const ruote = useRouter();
+
   const { user } = useContext(UserContext);
   return (
     <div className="bg-base-300 shadow-md z-10 sticky top-0">
@@ -73,7 +77,7 @@ const HeaderMain = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <img alt="avatar" src={`https://ui-avatars.com/api/?name=${user.name}&background=0D8ABC&color=fff`} />
                 </div>
               </label>
               <ul

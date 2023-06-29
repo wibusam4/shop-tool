@@ -20,7 +20,7 @@ const Input: React.FC<MainProps> = ({ label, type, name, style, data }) => {
         value={value}
         placeholder={label.toLowerCase()}
         onChange={(event) => setValue(event.target.value)}
-        className="input input-bordered"
+        className="input border-neutral-400"
       />
     </div>
   );

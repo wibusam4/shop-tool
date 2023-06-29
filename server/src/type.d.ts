@@ -8,6 +8,7 @@ export type FormLogin = {
 }
 
 export interface RequestHasLogin extends Request {
+  id?: number
   email?: string
   role?: Role
 }

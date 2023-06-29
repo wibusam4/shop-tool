@@ -11,7 +11,7 @@ interface MainProps {
 const Page: React.FC<MainProps> = ({ tool }) => {
   const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
   const [content, setContent] = useState(tool.content);
-  const [updateNote, setUpdateNot] = useState(tool.updateNote);
+  const [updateNote, setUpdateNote] = useState(tool.updateNote);
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: any) => {
     setIsLoading(true);
@@ -55,7 +55,7 @@ const Page: React.FC<MainProps> = ({ tool }) => {
                 <label className="label font-semibold">
                   <span className="label-text">Cập nhật</span>
                 </label>
-                <ReactQuill theme="snow" value={updateNote} onChange={setUpdateNot} />
+                <ReactQuill theme="snow" value={updateNote} onChange={setUpdateNote} />
               </div>
 
               <Input label="Link Hình ảnh" name="image" type="text" data={tool.image} />

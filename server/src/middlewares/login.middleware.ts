@@ -20,6 +20,7 @@ const login = async (req: RequestHasLogin, res: Response, next: NextFunction) =>
     if (user) {
       req.email = user.email
       req.role = user.role
+      req.id = user.id
       next()
       return
     }

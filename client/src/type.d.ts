@@ -36,4 +36,11 @@ declare global {
     vip: string;
     status: string;
   }
+
+  interface Log {
+    id: number;
+    userId: number;
+    content: string;
+    createdAt: DateTime;
+  }
 }

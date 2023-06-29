@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from ".";
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
+import { toast } from "react-hot-toast";
 const UserService = {
   getInfor: async () => {
     try {
@@ -33,6 +34,28 @@ const UserService = {
       if (response.data.success) {
         return response.data.message.user;
       }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  editById: async (data: object) => {
+    try {
+      const token = getCookie("token") as string;
+      const response = await axios(config("put", "/user/edit", token, data));
+      if (response.data.success) return toast.success(response.data.message);
+      toast.error(response.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  editMoney: async (data: object) => {
+    try {
+      const token = getCookie("token") as string;
+      const response = await axios(config("post", "/user/changemoney", token, data));
+      if (response.data.success) return toast.success(response.data.message);
+      toast.error(response.data.message);
     } catch (error) {
       console.log(error);
     }
