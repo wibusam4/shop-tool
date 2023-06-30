@@ -43,4 +43,10 @@ declare global {
     content: string;
     createdAt: DateTime;
   }
+
+  interface Menu {
+    path: string;
+    icon: JSX.Element;
+    name: string;
+  }
 }

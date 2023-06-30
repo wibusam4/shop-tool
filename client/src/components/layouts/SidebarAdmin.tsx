@@ -1,4 +1,4 @@
-import menus from "@/src/libs/menu-sidebar";
+import menu from "@/src/libs/menu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -18,15 +18,11 @@ const SidebarAdmin = () => {
             DashBoard
           </Link>{" "}
         </li>
-        {menus.map((menu, index) => {
+        {menu.sidebarAdmin().map((menu, index) => {
           return (
             <li className="" key={index}>
               <Link
-                className={
-                  router.pathname === menu.path
-                    ? "font-semibold  bg-base-200 "
-                    : "font-normal"
-                }
+                className={router.pathname === menu.path ? "font-semibold  bg-base-200 " : "font-normal"}
                 href={menu.path}
               >
                 {menu.icon} {menu.name}

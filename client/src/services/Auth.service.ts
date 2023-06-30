@@ -3,16 +3,22 @@ import axios from "axios";
 import Router from "next/router";
 import { AuthForm } from "../type";
 import { toast } from "react-hot-toast";
-import { setCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
 import validate from "../libs/validate";
 
 export const AuthService = {
+  logOut: () => {
+    deleteCookie("token");
+    deleteCookie("role");
+    Router.push("/");
+  },
+
   login: async (data: AuthForm) => {
     if (data.email === "" || !validate.email(data.email as string)) {
-      toast.error("Vui lòng nhập tài khoản!");
+      return toast.error("Nhập đúng email!");
     }
     if (data.password === "") {
-      toast.error("Vui lòng nhập tài khoản!");
+      return toast.error("Nhập mật khẩu!");
     }
     try {
       const response = await axios(config("post", "/auth/login", "", data));

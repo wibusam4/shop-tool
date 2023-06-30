@@ -1,5 +1,4 @@
-import { createContext } from 'react';
-import { User } from '../type';
+import { createContext } from "react";
 
 const UserContext = createContext<any>(null);
 

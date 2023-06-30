@@ -5,6 +5,7 @@ import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import { useRouter } from "next/router";
 import { data } from "autoprefixer";
+import { AuthService } from "@/src/services/Auth.service";
 const HeaderMain = () => {
   const ruote = useRouter();
 
@@ -58,14 +59,24 @@ const HeaderMain = () => {
               <label tabIndex={0} className="">
                 Tool
               </label>
-              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40">
                 <li>
                   <Link href={"/tool/"}>Server TeaMobile</Link>
                 </li>
               </ul>
             </li>
-            <li>
-              <a>Nạp tiền</a>
+            <li className="dropdown dropdown-hover">
+              <label tabIndex={1} className="">
+                Nạp tiền
+              </label>
+              <ul tabIndex={1} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-32">
+                <li>
+                  <Link href={"/recharge/card"}>Nạp thẻ</Link>
+                </li>
+                <li>
+                  <Link href={"/recharge/bank"}>Nạp Ví</Link>
+                </li>
+              </ul>
             </li>
             <li>
               <a>Hướng dẫn</a>
@@ -107,7 +118,11 @@ const HeaderMain = () => {
                     <Link href={"/admin"}>Dashboard</Link>
                   </li>
                 ) : null}
-                <li>
+                <li
+                  onClick={() => {
+                    AuthService.logOut();
+                  }}
+                >
                   <a>Đăng xuất</a>
                 </li>
               </ul>

@@ -11,7 +11,7 @@ const LayoutMain: React.FC<MainProps> = ({ children }) => {
     <UserProvider>
       <div className="flex flex-col min-h-screen">
         <HeaderMain />
-        <main className="flex-auto flex p-4 md:p-10">{children}</main>
+        <main className="flex-auto flex p-4 md:p-10 h-full">{children}</main>
         <FooterMain />
       </div>
     </UserProvider>

@@ -2,8 +2,8 @@ import Avatar from "@/src/components/User/Avatar";
 import LayoutMain from "@/src/components/layouts/LayoutMain";
 import Link from "next/link";
 import menu from "@/src/libs/menu";
-import Profile from "@/src/components/User/Profile";
 import { AuthService } from "@/src/services/Auth.service";
+import Bank from "@/src/components/recharge/Bank";
 
 const Page = () => {
   return (
@@ -34,8 +34,8 @@ const Page = () => {
             <div className="divider mt-0 mb-0 md:hidden"></div>
           </div>
 
-          <div className="sidebar p-4 flex-auto">
-            <Profile />
+          <div className="sidebar p-4 w-full md:w-[70%]">
+            <Bank />
           </div>
         </div>
       </div>
