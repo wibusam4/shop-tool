@@ -18,7 +18,7 @@ const Video: React.FC<MainProps> = ({ handle, tool }) => {
 
           <div className="overflow-hidden relative pb-[56%]">
             <iframe
-              src={`https://www.youtube.com/embed/YgRrOHfWH7I`}
+              src={`https://www.youtube.com/embed/${tool.video}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               className="left-0 top-0 h-full w-full absolute"

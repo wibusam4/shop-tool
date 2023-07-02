@@ -56,7 +56,7 @@ const menu = {
       {
         path: "/user/profile",
         icon: <UserIcon className={iconClasses} />,
-        name: "Thông tin tài khoản",
+        name: "Thông tin cá nhân",
       },
       {
         path: "/recharge/card",
@@ -69,9 +69,9 @@ const menu = {
         name: "Nạp Ví",
       },
       {
-        path: "/user/tool",
+        path: "/user/license",
         icon: <WrenchScrewdriverIcon className={iconClasses} />,
-        name: "Quản Lí Tool",
+        name: "Quản Lí License",
       },
       {
         path: "/user/balance",

@@ -1,19 +1,22 @@
 import LayoutAdmin from "@/src/components/layouts/LayoutAdmin";
-import TrashIcon from "@heroicons/react/24/solid/TrashIcon";
-import PencilIcon from "@heroicons/react/24/solid/PencilIcon";
 import MagnifyingGlassIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
 import CardHeader from "@/src/components/cards/CardHeader";
 import ToolService from "@/src/services/Tool.service";
 import Link from "next/link";
-
+import { DataGrid } from "@mui/x-data-grid";
+import table from "@/src/libs/table";
+import { useState } from "react";
+import CustomPagination from "@/src/components/table/Pagination";
 interface MainProps {
   data: [];
 }
 
-const index: React.FC<MainProps> = ({ data }) => {
-  const handleDetele = async (id: number) => {
-    ToolService.delteTool(id);
-  };
+const Page: React.FC<MainProps> = ({ data }) => {
+  const PAGE_SIZE = 7;
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: PAGE_SIZE,
+    page: 0,
+  });
   return (
     <LayoutAdmin>
       <CardHeader>
@@ -41,44 +44,16 @@ const index: React.FC<MainProps> = ({ data }) => {
         <div className="divider mt-2"></div>
         <div className="h-full w-full pb-6 bg-base-100">
           <div className="overflow-x-auto w-full">
-            <table className="table table-zebra w-full">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Tên Tool</th>
-                  <th>Giá Tháng</th>
-                  <th>Giá Năm</th>
-                  <th>Version</th>
-                  <th>Lượt click</th>
-                  <th>Lượt mua</th>
-                  <th>Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.length > 0 &&
-                  data.map((tool: Tool) => {
-                    return (
-                      <tr key={tool.id}>
-                        <td>{tool.id}</td>
-                        <td>{tool.nameTool}</td>
-                        <td>{tool.priceMonth}</td>
-                        <td>{tool.priceYear}</td>
-                        <td>{tool.version}</td>
-                        <td>{tool.click}</td>
-                        <td>{tool.sold}</td>
-                        <td className="flex">
-                          <Link href={`/admin/tool/${tool.id}`} className="btn btn-square btn-ghost text-info">
-                            <PencilIcon className="w-5" />
-                          </Link>
-                          <button className="btn btn-square btn-ghost text-error" onClick={() => handleDetele(tool.id)}>
-                            <TrashIcon className="w-5" />
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+            <DataGrid
+              rows={data}
+              columns={table.columnTool()}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[PAGE_SIZE]}
+              slots={{
+                pagination: CustomPagination,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -86,7 +61,7 @@ const index: React.FC<MainProps> = ({ data }) => {
   );
 };
 
-export default index;
+export default Page;
 
 export const getServerSideProps = async () => {
   const data = await ToolService.getAllTool();

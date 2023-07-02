@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 
 interface ChildProps {
   title: string;
@@ -29,7 +30,9 @@ const Profile = () => {
           {user?.email}
         </Table>
         <Table title="Số dư:" color="text-error">
-          {format.money(user?.money)}
+          <span className="text-error flex">
+            {format.money(user?.money)} <FireIcon className="w-5 h-5" />
+          </span>
         </Table>
         <Table title="Chức vụ:">{user?.role}</Table>
         <Table title="Vip:">{user?.vip}</Table>

@@ -2,6 +2,7 @@ import express from 'express'
 import UserController from '../controller/User.controller'
 import login from '~/middlewares/login.middleware'
 import admin from '~/middlewares/admin.middleware'
+import TransactionController from '~/controller/Transaction.controller'
 
 const UserRoute = express.Router()
 
@@ -12,6 +13,8 @@ UserRoute.post('/changemoney', login, admin, UserController.changeMoney)
 UserRoute.post('/changepass', login, UserController.changePassword)
 UserRoute.post('/buytool', login, UserController.buyTool)
 UserRoute.put('/edit', login, admin, UserController.edit)
+UserRoute.get('/balance', login, TransactionController.getBalanceById)
+UserRoute.get('/tool', login, TransactionController.getTransToolById)
 UserRoute.delete('/delete', login, admin, UserController.delete)
 
 export default UserRoute

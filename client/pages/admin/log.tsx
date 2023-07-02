@@ -1,16 +1,23 @@
 import CardHeader from "@/src/components/cards/CardHeader";
 import LayoutAdmin from "@/src/components/layouts/LayoutAdmin";
-import format from "@/src/libs/format";
+import CustomPagination from "@/src/components/table/Pagination";
+import table from "@/src/libs/table";
 import LogService from "@/src/services/Log.service";
 import MagnifyingGlassIcon from "@heroicons/react/24/outline/MagnifyingGlassIcon";
-import TrashIcon from "@heroicons/react/24/solid/TrashIcon";
-
+import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 
 interface MainProps {
   data: Log[];
 }
+
 const Page: React.FC<MainProps> = ({ data }) => {
+  const PAGE_SIZE = 7;
+  const [paginationModel, setPaginationModel] = React.useState({
+    pageSize: PAGE_SIZE,
+    page: 0,
+  });
+
   return (
     <LayoutAdmin>
       <CardHeader>
@@ -32,35 +39,16 @@ const Page: React.FC<MainProps> = ({ data }) => {
         <div className="divider mt-2"></div>
         <div className="h-full w-full pb-6 bg-base-100">
           <div className="overflow-x-auto w-full">
-            <table className="table table-zebra w-full">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>UserID</th>
-                  <th>Nội Dung</th>
-                  <th>Thời Gian</th>
-                  <th>Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.length > 0 &&
-                  data.map((log: Log) => {
-                    return (
-                      <tr key={log.id}>
-                        <td>{log.id}</td>
-                        <td>{log.userId}</td>
-                        <td className="min-w-[150px]">{log.content}</td>
-                        <td className="min-w-[150px]">{format.dateTime(log.createdAt)}</td>
-                        <td className="flex">
-                          <button className="btn btn-square btn-ghost text-error">
-                            <TrashIcon className="w-5" />
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+            <DataGrid
+              rows={data}
+              columns={table.columnLog()}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[PAGE_SIZE]}
+              slots={{
+                pagination: CustomPagination,
+              }}
+            />
           </div>
         </div>
       </div>
@@ -72,6 +60,5 @@ export default Page;
 
 export const getServerSideProps = async ({ req }: any) => {
   const data = await LogService.getAllLog(req.cookies.token);
-  const vcl = {};
   return { props: { data: JSON.parse(JSON.stringify(data)) } };
 };

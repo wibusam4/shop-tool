@@ -4,6 +4,8 @@ import format from "@/src/libs/format";
 import React, { useContext, useMemo } from "react";
 import UserContext from "@/src/context/UserContext";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
+import UserService from "@/src/services/User.service";
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 
 interface MainProps {
   type: number;
@@ -26,8 +28,9 @@ const Table: React.FC<ChildProps> = ({ children, title, color }) => {
 };
 
 const BuyTool: React.FC<MainProps> = ({ tool, type }) => {
-  const price = useMemo(() => (type == 1 ? tool.priceMonth : tool.priceYear), [type]);
+  const price = useMemo(() => (type == 0 ? tool.priceMonth : tool.priceYear), [type]);
   const { user } = useContext(UserContext);
+
   return (
     <dialog id="modal_buy_tool" className="modal">
       <form method="dialog" className="modal-box bg-base-100 p-0 rounded">
@@ -43,10 +46,10 @@ const BuyTool: React.FC<MainProps> = ({ tool, type }) => {
             {tool.nameTool}
           </Table>
           <div className="divider mt-0 mb-0"></div>
-          <Table title="Giá: " color="text-error">
+          <Table title="Giá: " color="text-accent">
             <span className="flex gap-x-[2px]">
               {format.money(price)}
-              <StarIcon className="w-5 h-5 text-warning" />
+              <FireIcon className="w-5 h-5 text-error" />
             </span>
           </Table>
           <div className="divider mt-0 mb-0"></div>
@@ -63,11 +66,18 @@ const BuyTool: React.FC<MainProps> = ({ tool, type }) => {
               </Link>
             ) : null}
             {user && user.money < price ? (
-              <Link href={"/user/recharge"} className="btn btn-warning">
+              <Link href={"/recharge/bank"} className="btn btn-warning">
                 Nạp Tiền
               </Link>
             ) : null}
-            {user && user.money > price ? <button className="btn btn-success">Mua ngay</button> : null}
+            {user && user.money > price ? (
+              <button
+                className="btn btn-success"
+                onClick={() => UserService.buyTool(tool.nameTool, price, tool.id, type.toString(), tool.server)}
+              >
+                Mua ngay
+              </button>
+            ) : null}
           </div>
           <div className="divider mt-0 mb-0"></div>
           <div>

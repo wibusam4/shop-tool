@@ -1,12 +1,12 @@
 import ToolService from "@/src/services/Tool.service";
 import LayoutMain from "@/src/components/layouts/LayoutMain";
 import format from "@/src/libs/format";
-import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Video from "@/src/components/modals/Video";
 import BuyTool from "@/src/components/modals/BuyTool";
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 
 interface MainProps {
   tool: Tool;
@@ -51,18 +51,18 @@ const ToolIem: React.FC<MainProps> = ({ tool }) => {
                     <p>Server: {tool.server}</p>
                     <BuyTool tool={tool} type={type} />
                     <div className="flex flex-wrap gap-4">
-                      <button className="btn btn-success flex-col" onClick={() => handleClick(1)}>
+                      <button className="btn btn-success flex-col" onClick={() => handleClick(0)}>
                         Mua Tháng
                         <span className="flex items-end">
                           {format.money(tool.priceMonth)}
-                          <StarIcon className="w-4 h-4" />
+                          <FireIcon className="w-4 h-4 text-error" />
                         </span>
                       </button>
-                      <button className="btn btn-warning flex-col" onClick={() => handleClick(2)}>
+                      <button className="btn btn-warning flex-col" onClick={() => handleClick(1)}>
                         Mua Năm
                         <span className="flex items-end">
                           {format.money(tool.priceYear)}
-                          <StarIcon className="w-4 h-4" />
+                          <FireIcon className="w-4 h-4 text-error" />
                         </span>
                       </button>
                       <button

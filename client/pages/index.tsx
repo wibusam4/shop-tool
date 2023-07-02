@@ -1,10 +1,10 @@
 import ToolService from "@/src/services/Tool.service";
 import LayoutMain from "@/src/components/layouts/LayoutMain";
 import format from "@/src/libs/format";
-import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import CloudArrowDownIcon from "@heroicons/react/24/solid/CloudArrowDownIcon";
 import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
 import Link from "next/link";
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 interface MainProps {
   data: [];
 }
@@ -35,8 +35,8 @@ const Home: React.FC<MainProps> = ({ data }) => {
                           </div>
                           <div className="card-body items-center text-center px-6">
                             <h2 className="card-title">{tool.nameTool}</h2>
-                            <p className="text-error font-semibold flex">
-                              {format.money(tool.priceMonth)} <StarIcon className="w-5 h-5 text-warning" />/ 1 Tháng
+                            <p className="font-semibold flex text-accent">
+                              {format.money(tool.priceMonth)} <FireIcon className="w-5 h-5 text-error " />/ 1 Tháng
                             </p>
 
                             <p className="font-semibold min-h-[48px]">{tool.infor}</p>

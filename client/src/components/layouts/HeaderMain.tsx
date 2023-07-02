@@ -3,15 +3,12 @@ import { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
 import StarIcon from "@heroicons/react/24/solid/StarIcon";
-import { useRouter } from "next/router";
-import { data } from "autoprefixer";
 import { AuthService } from "@/src/services/Auth.service";
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 const HeaderMain = () => {
-  const ruote = useRouter();
-
   const { user } = useContext(UserContext);
   return (
-    <div className="bg-base-300 shadow-md z-10 sticky top-0">
+    <div className="header-main bg-base-300 shadow-md z-10 sticky top-0">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -93,7 +90,7 @@ const HeaderMain = () => {
               </label>
               <ul
                 tabIndex={0}
-                className=" mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content font-semibold bg-neutral-300 rounded-box w-52 border border-neutral-900 gap-y-2"
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content font-semibold bg-neutral-300 rounded-box w-52 border border-neutral-900 gap-y-2"
               >
                 <li className="bg-accent rounded-box">
                   <a>{user.email}</a>
@@ -107,9 +104,9 @@ const HeaderMain = () => {
                 <li>
                   <a className="justify-between">
                     Số dư
-                    <span className="badge badge-error items-start">
+                    <span className="badge items-start">
                       {format.money(user.money)}
-                      <StarIcon className="w-4 h-4" />
+                      <FireIcon className="w-4 h-4 text-error" />
                     </span>
                   </a>
                 </li>
