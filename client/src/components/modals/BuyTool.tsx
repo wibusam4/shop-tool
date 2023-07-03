@@ -3,7 +3,6 @@ import Input from "../Input/Input";
 import format from "@/src/libs/format";
 import React, { useContext, useMemo } from "react";
 import UserContext from "@/src/context/UserContext";
-import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import UserService from "@/src/services/User.service";
 import FireIcon from "@heroicons/react/24/solid/FireIcon";
 

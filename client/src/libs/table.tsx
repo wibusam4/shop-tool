@@ -43,7 +43,7 @@ const table = {
     return columns;
   },
 
-  columnClientTransTool: () => {
+  columnClientTransTool: (handleEdit: Function) => {
     const columns: GridColDef[] = [
       { field: "id", headerName: "ID", width: 90 },
       {
@@ -73,9 +73,15 @@ const table = {
         field: "action",
         headerName: "Thao tác",
         width: 150,
+
         renderCell: (params) => (
           <>
-            <button className="btn btn-success btn-sm text-base-200 hover:bg-base-200 hover:text-success duration-300">
+            <button
+              onClick={() => {
+                handleEdit(params.row);
+              }}
+              className="btn btn-success btn-sm text-base-200 hover:bg-base-200 hover:text-success duration-300"
+            >
               <PencilIcon className="w-5 h-5 " />
             </button>
             <button className="btn btn-error btn-sm ml-2 text-base-200 hover:bg-base-200 hover:text-error duration-300">

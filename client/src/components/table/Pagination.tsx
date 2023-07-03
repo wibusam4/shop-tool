@@ -8,8 +8,8 @@ const CustomPagination = () => {
   return (
     <Pagination
       color="primary"
-      variant="outlined"
-      shape="rounded"
+      variant="text"
+      shape="circular"
       page={page + 1}
       count={pageCount}
       // @ts-expect-error
