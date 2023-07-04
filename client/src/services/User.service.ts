@@ -114,5 +114,17 @@ const UserService = {
       console.log(error);
     }
   },
+
+  editKey: async (key: object, toolId: string, id: string) => {
+    try {
+      const token = getCookie("token") as string;
+      const data = { ...key, toolId, id };
+      const response = await axios(config("post", "/user/changekey", token, data));
+      if (!response.data.success) return toast.error(response.data.message);
+      toast.success(response.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 export default UserService;

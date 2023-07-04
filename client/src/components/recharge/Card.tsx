@@ -4,16 +4,18 @@ import Input from "../Input/Input";
 const Card = () => {
   return (
     <div className="w-full md:p-10">
-      <h1 className="uppercase border-l-4 border-success p-2 font-bold text-xl">Nạp Thẻ Cào</h1>
-      <div className="max-w-[500px] flex flex-col gap-y-2 bg-error mt-2 rounded border border-error bg-opacity-20 p-4 text-sm font-semibold">
-        <p className="py-1">- Bạn sẽ bị khóa tài khoản nếu spam nhiều lần</p>
-        <p className="py-1">- Nhập đầy đủ Serial - Mã Thẻ - Mệnh Giá - Nhà Mạng</p>
-        <p className="py-1">- Thẻ sẽ được xử lí và nạp tự động</p>
-        <p className="py-1">- Nạp sai mệnh giá sẽ bị trừ tiền theo quy định của web</p>
-        <p className="py-1">
-          - Check chiết khấu, giá trị trừ tiền khi sai mệnh giá tại <a className="link link-primary">thesiere.com</a>
-        </p>
-      </div>
+      <h1 className="uppercase border-l-4 border-success p-2 font-bold text-xl">
+        Nạp Thẻ Cào - <span className="text-error">Bảo trì</span>
+      </h1>
+      <ul className="list-decimal list-inside max-w-[500px] bg-error mt-2 rounded border border-error bg-opacity-20 p-4 text-sm font-semibold">
+        <li className="py-[2px]">Bạn sẽ bị khóa tài khoản nếu spam nhiều lần</li>
+        <li className="py-[2px]">Nhập đầy đủ Serial - Mã Thẻ - Mệnh Giá - Nhà Mạng</li>
+        <li className="py-[2px]">Thẻ sẽ được xử lí và nạp tự động</li>
+        <li className="py-[2px]">Nạp sai mệnh giá sẽ bị trừ tiền theo quy định của web</li>
+        <li className="py-[2px]">
+          Check chiết khấu, giá trị trừ tiền khi sai mệnh giá tại <a className="link link-primary">thesiere.com</a>
+        </li>
+      </ul>
       <div className="py-4 md:py-5 max-w-[500px] font-semibold">
         <Input label="Serial" type="text" name="serial" />
         <Input label="Mã Thẻ" type="text" name="code" />
@@ -23,7 +25,9 @@ const Card = () => {
           </label>
           <select name="role" className="select select-bordered">
             <option>VIETTEL</option>
-            <option>VINAPHONE</option>
+            <option>VINA-PHONE</option>
+            <option>MOBI-PHONE</option>
+            <option>VIETNAM-MOBILE</option>
           </select>
         </div>
         <div className="form-control w-full">

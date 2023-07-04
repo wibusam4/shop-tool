@@ -10,7 +10,7 @@ interface MainProps {
 const Input: React.FC<MainProps> = ({ label, type, name, style, data }) => {
   const [value, setValue] = useState(data);
   return (
-    <div className={`form-control ${style}`}>
+    <div className={`form-control ${style ?? ""}`}>
       <label className="label font-semibold">
         <span className="label-text">{label}</span>
       </label>

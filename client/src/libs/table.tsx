@@ -133,12 +133,12 @@ const table = {
 
   columnClientTransBalance: () => {
     const columns: GridColDef[] = [
-      { field: "id", headerName: "ID", width: 70 },
+      { field: "id", headerName: "ID", width: 90 },
 
       {
         field: "oldMoney",
         headerName: "Số dư cũ",
-        width: 120,
+        width: 150,
         valueFormatter: ({ value }) => format.money(value),
         cellClassName: () => {
           return "text-primary font-semibold";
@@ -147,7 +147,7 @@ const table = {
       {
         field: "money",
         headerName: "Số tiền",
-        width: 120,
+        width: 150,
         valueFormatter: ({ value }) => format.money(value),
         cellClassName: ({ value }) => {
           return `${value > 0 ? "text-success" : "text-error"}  font-semibold`;
@@ -156,14 +156,14 @@ const table = {
       {
         field: "newMoney",
         headerName: "Số dư mới",
-        width: 120,
+        width: 150,
         valueFormatter: ({ value }) => format.money(value),
         cellClassName: () => {
           return "text-secondary font-semibold";
         },
       },
-      { field: "content", headerName: "Nội dung", width: 220 },
-      { field: "createdAt", headerName: "Ngày Tạo", valueFormatter: ({ value }) => format.dateTime(value), width: 130 },
+      { field: "content", headerName: "Nội dung", width: 250 },
+      { field: "createdAt", headerName: "Ngày Tạo", valueFormatter: ({ value }) => format.dateTime(value), width: 200 },
     ];
     return columns;
   },

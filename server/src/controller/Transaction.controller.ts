@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '~/db'
 import { RequestHasLogin } from '~/type'
-import { responseJson } from '~/untils/index'
+import { responseJson, timeToMilisencond } from '~/untils/index'
 
 const TransactionController = {
   getAllBalance: async (req: Request, res: Response) => {
@@ -47,8 +47,31 @@ const TransactionController = {
         where: { userId: id },
         include: { tool: { select: { nameTool: true } } }
       })
-
       return responseJson(res, 200, true, { transaction })
+    } catch (error) {
+      console.log(error)
+      responseJson(res, 200, false, 'Không tìm thấy ID')
+    }
+  },
+
+  editKeyTransTool: async (req: RequestHasLogin, res: Response) => {
+    try {
+      const { id, toolId, key } = req.body
+      const userId: number = req.id as number
+      if (!toolId || !key) return responseJson(res, 200, false, 'Điền thiếu thông tin')
+      const match = { id: Number(id), toolId: Number(toolId), userId }
+      const transTool = await prisma.historyBuyTool.findFirst({
+        where: match
+      })
+      if (!transTool) return responseJson(res, 200, false, 'Không tìm thấy tool')
+      const monthMiliSecond = 30 * 24 * 60 * 60 * 1000
+      const dayMiliSecond = 24 * 60 * 60 * 1000
+      if (timeToMilisencond(transTool.createdAt) > monthMiliSecond && transTool.type == 0)
+        return responseJson(res, 200, false, 'Key đã hết hạn')
+      if (timeToMilisencond(transTool.updatedAt) < dayMiliSecond)
+        return responseJson(res, 200, false, 'Chưa đủ thời gian sửa')
+      await prisma.historyBuyTool.update({ where: { id: transTool.id }, data: { key: key } })
+      responseJson(res, 200, true, 'Sửa key thành công')
     } catch (error) {
       console.log(error)
       responseJson(res, 200, false, 'Không tìm thấy ID')

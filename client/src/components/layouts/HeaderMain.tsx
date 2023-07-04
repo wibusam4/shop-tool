@@ -23,23 +23,34 @@ const HeaderMain = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-neutral-300 border border-neutral-900 font-semibold"
+            >
               <li>
-                <a>Item 1</a>
+                <Link href={"/"}>Trang Chủ</Link>
               </li>
               <li>
-                <a>Parent</a>
+                <a>Tool</a>
                 <ul className="p-2">
                   <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
+                    <Link href={"/tool"}>Tea Mobile</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a>Item 3</a>
+                <a>Nạp Tiền</a>
+                <ul className="p-2">
+                  <li>
+                    <Link href={"/recharge/card"}>Nạp Thẻ</Link>
+                  </li>
+                  <li>
+                    <Link href={"/recharge/bank"}>Nạp Ví</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link href={"/help"}>Hướng Dẫn</Link>
               </li>
             </ul>
           </div>
@@ -76,7 +87,7 @@ const HeaderMain = () => {
               </ul>
             </li>
             <li>
-              <a>Hướng dẫn</a>
+              <Link href={"/help"}>Hướng dẫn</Link>
             </li>
           </ul>
         </div>

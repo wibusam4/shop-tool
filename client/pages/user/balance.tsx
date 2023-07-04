@@ -1,7 +1,6 @@
 import LayoutMain from "@/src/components/layouts/LayoutMain";
 import CustomPagination from "@/src/components/table/Pagination";
 import Sidebar from "@/src/components/User/Sidebar";
-import format from "@/src/libs/format";
 import table from "@/src/libs/table";
 import UserService from "@/src/services/User.service";
 import { DataGrid } from "@mui/x-data-grid";
@@ -11,7 +10,7 @@ interface MainProps {
   data: [];
 }
 const Page = ({ data }: MainProps) => {
-  const PAGE_SIZE = 7;
+  const PAGE_SIZE = 5;
   const [paginationModel, setPaginationModel] = useState({
     pageSize: PAGE_SIZE,
     page: 0,
@@ -26,16 +25,19 @@ const Page = ({ data }: MainProps) => {
           <div className="sidebar p-4 flex-auto overflow-x-auto md:max-w-[70%]">
             <div className="w-full md:p-10">
               <h1 className="uppercase border-l-4 border-success p-2 font-bold text-xl mb-4">Biến động số dư</h1>
-              <DataGrid
-                rows={data}
-                columns={table.columnClientTransBalance()}
-                paginationModel={paginationModel}
-                onPaginationModelChange={setPaginationModel}
-                pageSizeOptions={[PAGE_SIZE]}
-                slots={{
-                  pagination: CustomPagination,
-                }}
-              />
+              <div className="h-[390px]">
+                <DataGrid
+                  rows={data}
+                  columns={table.columnClientTransBalance()}
+                  paginationModel={paginationModel}
+                  onPaginationModelChange={setPaginationModel}
+                  pageSizeOptions={[PAGE_SIZE]}
+                  //hideFooter
+                  slots={{
+                    pagination: CustomPagination,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

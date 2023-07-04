@@ -18,7 +18,7 @@ const Bank = () => {
           <div className="text-center  mt-2">
             <div className="flex">
               <span className="w-1/2 px-4 text-right">SĐT:</span>
-              <span className="w-1/2 px-1 text-left  font-semibold text-success">0367.258.861</span>
+              <span className="w-1/2 px-1 text-left  font-semibold text-secondary">0367.258.861</span>
             </div>
             <div className="divider mt-0 mb-0"></div>
             <div className="flex">
@@ -35,15 +35,15 @@ const Bank = () => {
         <div className="w-full xl:w-1/2 p-3">
           <div className="flex items-center w-full justify-center py-2">
             <img
-              className="object-cover h-20"
-              src="https://avatars.githubusercontent.com/u/36770798?s=200&v=4"
+              className="object-cover h-20 rounded"
+              src="https://warnrbros.com/wp-content/uploads/2023/03/thesieure.png"
               alt=""
             />
           </div>
           <div className="text-center mt-2">
             <div className="flex">
-              <span className="w-1/2 px-4 text-right">SĐT:</span>
-              <span className="w-1/2 px-1 text-left  font-semibold text-success">0367248861</span>
+              <span className="w-1/2 px-4 text-right">Tài Khoản:</span>
+              <span className="w-1/2 px-1 text-left  font-semibold text-secondary">wibusama</span>
             </div>
             <div className="divider mt-0 mb-0"></div>
             <div className="flex">

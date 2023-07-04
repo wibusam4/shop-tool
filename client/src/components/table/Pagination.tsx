@@ -7,6 +7,7 @@ const CustomPagination = () => {
   const pageCount = useGridSelector(apiRef, gridPageCountSelector);
   return (
     <Pagination
+      sx={(theme) => ({ padding: theme.spacing(1.5, 0) })}
       color="primary"
       variant="text"
       shape="circular"

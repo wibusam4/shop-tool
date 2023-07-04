@@ -54,3 +54,7 @@ export const dataTool = (tool: Tool) => {
     video: tool.video
   }
 }
+
+export const timeToMilisencond = (time: string | number | Date) => {
+  return Date.now() - +new Date(time)
+}
