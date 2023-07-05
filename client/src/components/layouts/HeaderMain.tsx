@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useContext } from "react";
 import UserContext from "@/src/context/UserContext";
 import format from "@/src/libs/format";
-import StarIcon from "@heroicons/react/24/solid/StarIcon";
 import { AuthService } from "@/src/services/Auth.service";
 import FireIcon from "@heroicons/react/24/solid/FireIcon";
 const HeaderMain = () => {

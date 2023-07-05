@@ -5,15 +5,31 @@ import CloudArrowDownIcon from "@heroicons/react/24/solid/CloudArrowDownIcon";
 import EyeIcon from "@heroicons/react/24/solid/EyeIcon";
 import Link from "next/link";
 import FireIcon from "@heroicons/react/24/solid/FireIcon";
+import { useEffect, useState } from "react";
+import InforHome from "@/src/components/modals/InforHome";
+
 interface MainProps {
   data: [];
 }
+
 const Home: React.FC<MainProps> = ({ data }) => {
+  const [modalShown, toggleModal] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      toggleModal(true);
+    }, 200);
+  }, []);
   return (
     <LayoutMain>
       <div className="bg-base-200 mx-auto rounded shadow-md w-full">
         <div className="max-w-[1280px] m-auto">
           <div className="tiltle p-4 md:p-10">
+            <InforHome
+              shown={modalShown}
+              close={() => {
+                toggleModal(false);
+              }}
+            />
             <h1 className="text-center text-2xl uppercase font-bold relative">Tool Server Teamobile</h1>
             <div className="w-36 h-1 bg-success m-auto"></div>
             <div className="card-item flex flex-wrap mt-2 max-w-[1280px]">
@@ -38,7 +54,6 @@ const Home: React.FC<MainProps> = ({ data }) => {
                             <p className="font-semibold flex text-accent">
                               {format.money(tool.priceMonth)} <FireIcon className="w-5 h-5 text-error " />/ 1 Tháng
                             </p>
-
                             <p className="font-semibold min-h-[48px]">{tool.infor}</p>
                             <div className="font-semibold flex flex-wrap justify-center items-center gap-x-1">
                               <div className="flex items-center gap-[2px]">

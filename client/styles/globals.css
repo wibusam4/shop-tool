@@ -26,3 +26,11 @@
 .hover-effect {
     @apply absolute -bottom-1 left-0 h-[1px] bg-primary duration-300 transition-all
 }
+
+.my-modal {
+    @apply flex items-center justify-center fixed inset-0 w-full h-full z-20 bg-neutral-900 bg-opacity-25 transition-opacity duration-200 overflow-y-auto
+}
+
+.my-modal_box {
+    @apply relative bg-base-100 transition-transform duration-200 rounded shadow-md
+}

@@ -30,6 +30,11 @@ const Bank = () => {
               <span className="w-1/2 px-4 text-right">Nội dung:</span>
               <span className="w-1/2 px-1 text-left font-semibold text-error">wibu_{user?.id}</span>
             </div>
+            <div className="divider mt-0 mb-0"></div>
+            <div className="flex gap-x-1 items-center justify-center">
+              <span className="loading loading-spinner loading-xs"></span>
+              <p className="text-center">Tự động xử lý sau 1-2p</p>
+            </div>
           </div>
         </div>
         <div className="w-full xl:w-1/2 p-3">
@@ -54,6 +59,11 @@ const Bank = () => {
             <div className="flex">
               <span className="w-1/2 px-4 text-right">Nội dung:</span>
               <span className="w-1/2 px-1 text-left font-semibold text-error">wibu_{user?.id}</span>
+            </div>
+            <div className="divider mt-0 mb-0"></div>
+            <div className="flex gap-x-1 items-center justify-center">
+              <span className="loading loading-spinner loading-xs"></span>
+              <p className="text-center">Tự động xử lý sau 1-2p</p>
             </div>
           </div>
         </div>
